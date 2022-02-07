@@ -1,0 +1,188 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="style.css" rel="stylesheet" type="text/css" media="all">
+  <script src="icecast-metadata-stats-0.1.1.min.js"></script>
+  <script>
+    var channel_id = 0;
+    const onStats = (stats) => {
+      document.getElementById("artist").innerHTML = stats.icestats.source[channel_id].artist;
+      document.getElementById("title").innerHTML = stats.icestats.source[channel_id].title;
+      if(audioplayer.ended) {
+        audioplayer.load();
+      }
+    };
+    const statsListener = 
+      new IcecastMetadataStats(
+        "https://temple.xiixiixii.xyz:8443/ABYSS.ogg",
+        { sources: ["icestats"], interval: ["4"], onStats }
+      );
+    statsListener.start();
+  </script>
+  <script>
+    function change_channel() {
+      channel_id = document.getElementById("channelselect").value;
+      var channelselect = document.getElementById("channelselect");
+      var channel = channelselect.options[channelselect.selectedIndex].text;
+      var audioplayer = document.getElementById("audioplayer");
+      audioplayer.src = `https://temple.xiixiixii.xyz:8443/${channel}.ogg`;
+      m3u.href = `https://temple.xiixiixii.xyz:8443/${channel}.ogg.m3u`;
+      xspf.href = `https://temple.xiixiixii.xyz:8443/${channel}.ogg.xspf`;
+      audioplayer.play();
+    }
+    function change_volume() {
+      audioplayer.volume=document.getElementById("volume_bar").value;
+
+    }
+    function audio_toggle() {
+      if (audioplayer.paused) {
+        audioplayer.play();
+        document.getElementById("play_button").src = "Images/Buttons/pause_64.png";
+      } else {
+        audioplayer.pause();
+        document.getElementById("play_button").src = "Images/Buttons/play_64.png";
+      }
+    }
+    function audio_stop() {
+      if (audioplayer.paused == false) {
+        audioplayer.src = audioplayer.src;
+        audioplayer.pause();
+        document.getElementById("play_button").src = "Images/Buttons/play_64.png";
+      }
+    }
+    function volume_cycle() {
+      if (audioplayer.volume < 0.51) {
+        audioplayer.volume = 0.51;
+      } else if (audioplayer.volume < 1) {
+        audioplayer.volume = 1;
+      } else {
+        audioplayer.volume = 0;
+      }
+      update_volume_button();
+
+    }
+    function update_volume_button() {
+      if (audioplayer.volume === 0) {
+        document.getElementById("volume_button").src = "Images/Buttons/speaker_mute.png";
+      } else if (audioplayer.volume > 0.51) {
+        document.getElementById("volume_button").src = "Images/Buttons/speaker_high.png";
+      } else {
+        document.getElementById("volume_button").src = "Images/Buttons/speaker_low.png";
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="row">
+  <div class="main">
+    
+    <a href="https://xiixiixii.xyz"><img src="Images/gate.gif"></a>
+    <p></p>
+    <div class="row">
+    <div class="custom-select" style="width:200px;">
+      <select id="channelselect" autocomplete="off" onchange="change_channel()">
+        <option value="0" selected>ABYSS</option>
+        <option value="0">ABYSS</option>
+        <option value="1">DREAMING</option>
+        <option value="2">MONOLITH</option>
+        <option value="3">TEKKEN</option>
+      </select>
+    </div>
+    </div>
+    <p></p>
+    <input type="image" src="Images/Buttons/stop_64.png" onclick="audio_stop()" id="stop_button">
+    <input type="image" src="Images/Buttons/play_64.png" onclick="audio_toggle()" id="play_button">
+    <input type="image" src="Images/Buttons/speaker_high.png" onclick="volume_cycle()" id="volume_button">
+    <audio id="audioplayer" autoplay preload="none" src="https://temple.xiixiixii.xyz:8443/ABYSS.ogg" type="audio/ogg"/>
+    </audio>
+    <p><span id="artist"></span> - <span id="title"></span> </p>
+    <a id="m3u" href="https://temple.xiixiixii.xyz:8443/ABYSS.ogg.m3u">M3U</a>
+    <a id="xspf" href="https://temple.xiixiixii.xyz:8443/ABYSS.ogg.xspf">XSPF</a>
+  </div>
+  </div>
+</body>
+
+  <script>
+     var x, i, j, l, ll, selElmnt, a, b, c;
+  /* Look for any elements with the class "custom-select": */
+  x = document.getElementsByClassName("custom-select");
+  l = x.length;
+  for (i = 0; i < l; i++) {
+    selElmnt = x[i].getElementsByTagName("select")[0];
+    ll = selElmnt.length;
+    /* For each element, create a new DIV that will act as the selected item: */
+    a = document.createElement("DIV");
+    a.setAttribute("class", "select-selected");
+    a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+    x[i].appendChild(a);
+    /* For each element, create a new DIV that will contain the option list: */
+    b = document.createElement("DIV");
+    b.setAttribute("class", "select-items select-hide");
+    for (j = 1; j < ll; j++) {
+      /* For each option in the original select element,
+      create a new DIV that will act as an option item: */
+      c = document.createElement("DIV");
+      c.innerHTML = selElmnt.options[j].innerHTML;
+      c.addEventListener("click", function(e) {
+          /* When an item is clicked, update the original select box,
+          and the selected item: */
+          var y, i, k, s, h, sl, yl;
+          s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+          sl = s.length;
+          h = this.parentNode.previousSibling;
+          for (i = 0; i < sl; i++) {
+            if (s.options[i].innerHTML == this.innerHTML) {
+              s.selectedIndex = i;
+              h.innerHTML = this.innerHTML;
+              y = this.parentNode.getElementsByClassName("same-as-selected");
+              yl = y.length;
+              for (k = 0; k < yl; k++) {
+                y[k].removeAttribute("class");
+              }
+              this.setAttribute("class", "same-as-selected");
+              change_channel();
+              break;
+            }
+          }
+          h.click();
+      });
+      b.appendChild(c);
+    }
+    x[i].appendChild(b);
+    a.addEventListener("click", function(e) {
+      /* When the select box is clicked, close any other select boxes,
+      and open/close the current select box: */
+      e.stopPropagation();
+      closeAllSelect(this);
+      this.nextSibling.classList.toggle("select-hide");
+      this.classList.toggle("select-arrow-active");
+    });
+  }
+
+  function closeAllSelect(elmnt) {
+    /* A function that will close all select boxes in the document,
+    except the current select box: */
+    var x, y, i, xl, yl, arrNo = [];
+    x = document.getElementsByClassName("select-items");
+    y = document.getElementsByClassName("select-selected");
+    xl = x.length;
+    yl = y.length;
+    for (i = 0; i < yl; i++) {
+      if (elmnt == y[i]) {
+        arrNo.push(i)
+      } else {
+        y[i].classList.remove("select-arrow-active");
+      }
+    }
+    for (i = 0; i < xl; i++) {
+      if (arrNo.indexOf(i)) {
+        x[i].classList.add("select-hide");
+      }
+    }
+  }
+
+  /* If the user clicks anywhere outside the select box,
+  then close all select boxes: */
+  document.addEventListener("click", closeAllSelect);
+  </script>
+</html>
