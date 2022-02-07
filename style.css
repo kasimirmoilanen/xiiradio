@@ -16,6 +16,11 @@ body {
   font-size: 32px;
 }
 
+::selection {
+  background-color: red;
+  color: black;
+}
+
 /*Channel selector*/
 
 /*the container must be positioned relative:*/
