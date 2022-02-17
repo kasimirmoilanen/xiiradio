@@ -1,3 +1,10 @@
+:root {
+  --color0: testi;
+  --color1: red;
+  --color2: white;
+  --color3: darkred;
+}
+
 @font-face {
   font-family: 'IBM VGA';
   src: url('./Fonts/WebPlus_IBM_VGA_9x16.woff');
@@ -107,6 +114,10 @@ body {
 	border: 1px solid white;
   padding: 12px;
 	height: 100%;
+}
+
+.top_image {
+  height: 256px;
 }
 a {
  color: white; 

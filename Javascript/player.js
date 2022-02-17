@@ -8,6 +8,7 @@ function change_channel() {
   xspf.href = `https://temple.xiixiixii.xyz:8443/${channel}.ogg.xspf`;
   audioplayer.play();
   document.getElementById("play_button").src = "Images/Buttons/pause_64.png";
+  document.getElementById("channel_gif").src = `Images/${channel}.gif`;
 }
 function change_volume() {
   audioplayer.volume=document.getElementById("volume_bar").value;
