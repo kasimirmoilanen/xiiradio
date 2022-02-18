@@ -1,5 +1,5 @@
 :root {
-  --color0: testi;
+  --color0: black;
   --color1: red;
   --color2: white;
   --color3: darkred;
@@ -17,15 +17,15 @@ body {
   background-attachment: fixed;
   background-repeat: repeat;
   background-position: right bottom;
-  background-color: black;
-  color: red;
+  background-color: var(--color0);
+  color: var(--color1);
   font-family: 'IBM VGA';
   font-size: 32px;
 }
 
 ::selection {
-  background-color: red;
-  color: black;
+  background-color: var(--color1);
+  color: var(--color0);
 }
 
 /*Channel selector*/
@@ -42,8 +42,8 @@ body {
 }
 
 .select-selected {
-  color: black;
-  background-color: red;
+  background-color: var(--color1);
+  color: var(--color0);
 }
 
 /*style the arrow inside the select element:*/
@@ -55,18 +55,18 @@ body {
   width: 0;
   height: 0;
   border: 6px solid transparent;
-  border-color: black transparent transparent transparent;
+  border-color: var(--color0) transparent transparent transparent;
 }
 
 /*point the arrow upwards when the select box is open (active):*/
 .select-selected.select-arrow-active:after {
-  border-color: transparent transparent black transparent;
+  border-color: transparent transparent var(--color0) transparent;
   top: 7px;
 }
 
 /*style the items (options), including the selected item:*/
 .select-items div,.select-selected {
-  color: black;
+  color: var(--color0);
   padding: 8px 16px;
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -77,7 +77,7 @@ body {
 /*style items (options):*/
 .select-items {
   position: absolute;
-  background-color: darkred;
+  background-color: var(--color3);
   top: 100%;
   left: 0;
   right: 0;
@@ -110,7 +110,7 @@ body {
   font-size: 32px;
   flex: 100%;
   background-color: black;
-	color: red;
+	color: var(--color1);
 	border: 1px solid white;
   padding: 12px;
 	height: 100%;
@@ -120,7 +120,7 @@ body {
   height: 256px;
 }
 a {
- color: white; 
+  color: var(--color2); 
   font-family: 'IBM VGA';
   font-size: 32px;
 }
@@ -128,3 +128,6 @@ p {
   font-family: 'IBM VGA';
   font-size: 32px;
 }
+
+
+
