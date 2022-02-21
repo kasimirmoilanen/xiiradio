@@ -5,6 +5,8 @@ var result = ""
 var theme_keys = []
 var theme_values = []
 var regex = new RegExp(`/--${theme_keys[0]}: .*$/gm`)
+var testi = 'color0';
+var str = '';
 
 
 const key_value_pairs = JSON.parse(fs.readFileSync('../theme.json'), (key, value) => {
@@ -15,14 +17,24 @@ function applyConfigurationToCss() {
   fs.readFile('../style.css', 'utf-8', function(err, data) {
     if (err) throw err;
     for (let i = 0; i < theme_keys.length; i++) {
+      str = theme_keys[0]
+      console.log(str)
+      regex = new RegExp(str, 'gm')
       //var newValue = data.replace(new RegExp(`/--${theme_keys[i]}: .*$/gm`), `--${theme_keys[i]}: ${theme_values[i]}`) 
       //console.log(newValue)
+      fs.writeFile('../style.css', data.replace(regex, theme_values[0]), 'utf-8', function(err, data) {
+        if (err) throw err;
+        console.log('done')
+      })
+      /*
       fs.writeFile('../style.css', 
-                    data.replace(new RegExp(`/--${theme_keys[i]}: .*$/gm`), `--${theme_keys[i]}: ${theme_values[i]}`), 
+                    data.replace(`/--${theme_keys[i]}: .*$/gm`, `--${theme_keys[i]}: ${theme_values[i]}`), 
                     'utf-8', function(err, data) {
         if (err) throw err;
         console.log('done')
       })
+      */
+
     }
   })
 }
