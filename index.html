@@ -25,9 +25,11 @@
     </div>
     </div>
     <p></p>
-    <input type="image" src="Images/Buttons/stop_64.png" onclick="audio_stop()" id="stop_button">
-    <input type="image" src="Images/Buttons/play_64.png" onclick="audio_toggle()" id="play_button">
-    <input type="image" src="Images/Buttons/speaker_high.png" onclick="volume_cycle()" id="volume_button">
+    <div class="button_menu">
+      <input type="image" src="Images/Buttons/stop.png" onclick="audio_stop()" id="stop_button">
+      <input type="image" src="Images/Buttons/play.png" onclick="audio_toggle()" id="play_button">
+      <input type="image" src="Images/Buttons/vol_high.png" onclick="volume_cycle()" id="volume_button">
+    </div>
     <audio id="audioplayer" autoplay preload="none" src="https://temple.xiixiixii.xyz:8443/ABYSS.ogg" type="audio/ogg"/>
     </audio>
     <p><span id="artist"></span> - <span id="title"></span> </p>
