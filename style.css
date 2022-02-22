@@ -32,6 +32,16 @@ body {
   border: 1px solid;
   border-color: var(--color3);
 }
+/*
+.button_menu {
+  border: 1px solid;
+  border-color: var(--color2);
+}
+.button_menu input {
+  border: 1px solid;
+  border-color: var(--color2);
+}
+*/
 
 /*Channel selector*/
 
