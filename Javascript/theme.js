@@ -1,51 +1,25 @@
-/* read theme.json
- * parse json
- * extract keys and values
- * apply keys and values to .env
- */
-
 const fs = require('fs')
 const path = require('path')
-var result = ""
+let theme_keys = []
+let theme_values = []
+let regex = new RegExp(`/--${theme_keys[0]}: .*$/gm`)
+let str = '';
+let css_file = fs.readFileSync('../style.css', 'utf-8')
 
-const parsed_test = JSON.parse(fs.readFileSync('../theme.json'))
 
-function formatConfiguration(parsed_json) {
-  result = result.concat( "color0: " + parsed_test.theme.color0 + "\n", 
-                          "color1: " + parsed_test.theme.color1 + "\n",
-                          "color2: " + parsed_test.theme.color2 + "\n",
-                          "color3: " + parsed_test.theme.color3 + "\n"
-  )
-}
+const key_value_pairs = JSON.parse(fs.readFileSync('../theme.json'), (key, value) => {
+  theme_keys.push(key)
+  theme_values.push(value)
+})
 
-formatConfiguration(parsed_test)
-
-function applyConfigurationToEnv(parsed_json) {
-  fs.writeFile('../.env', parsed_json, (err) => {
-    if (err) {
-      console.log(err)
+function applyConfigurationToCss() {
+    for (let i = 0; i < theme_keys.length - 2; i++) {
+      str = theme_keys[i]
+      console.log(str)
+      regex = new RegExp(`--${str}: .*$`, 'gm')
+      fs.writeFileSync('../style.css', css_file.replace(regex, `--${str}: ${theme_values[i]};`), 'utf-8')
+      css_file = fs.readFileSync('../style.css', 'utf-8')
     }
-  })
 }
 
-applyConfigurationToEnv(result)
-
-/* read .env
- *
- *
- *
- *
- */
-function applyConfigurationToCss(dotenvfile) {
-  fs.readFile('../style.css', 'utf-8', function(err, data) {
-    if (err) throw err;
-    var newValue = data.replace(/color0.*$/gm, 'color0: testi;');
-
-    fs.writeFile('../style.css', newValue, 'utf-8', function(err, data) {
-      if (err) throw err;
-      console.log('done')
-    })
-  })
-}
-
-applyConfigurationToCss(result)
+applyConfigurationToCss()
