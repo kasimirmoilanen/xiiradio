@@ -3,6 +3,7 @@
     "color0": "black",
     "color1": "red",
     "color2": "white",
-    "color3": "darkred"
+    "color3": "darkred",
+    "bg-img": "Images/TEKKEN.gif"
   }
 }
