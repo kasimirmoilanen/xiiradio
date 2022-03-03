@@ -1,9 +1,10 @@
 {
   "theme": {
-    "color0": "black",
-    "color1": "red",
-    "color2": "white",
-    "color3": "darkred",
-    "bg-img": "Images/TEKKEN.gif"
+    "color0": "#002b36",
+    "color1": "#93a1a1",
+    "color2": "#859900",
+    "color3": "#586e75",
+    "bg-gif": "url(\"Themes/solarized-dark/line.gif\")",
+    "bg-img": "url(\"Themes/solarized-dark/bg.jpg\")"
   }
 }
