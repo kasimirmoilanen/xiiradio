@@ -11,6 +11,7 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.2",
+    "fs": "^0.0.1-security",
     "icecast-metadata-js": "^0.6.2",
     "icecast-metadata-player": "^1.11.3"
   }

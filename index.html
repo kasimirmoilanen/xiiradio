@@ -3,14 +3,13 @@
   <meta charset="UTF-8">
   <link href="style.css" rel="stylesheet" type="text/css" media="all">
   <script src="Javascript/icecast-metadata-stats-0.1.1.min.js"></script>
-  <script src="Javascript/player.js"></script>
   <script src="Javascript/metadata.js"></script>
 </head>
 <body>
   <div class="row">
   <div class="main">
     <div class="top_image">
-    <a href="https://xiixiixii.xyz"><img src="Images/ABYSS.gif" id="channel_gif" ></a>
+    <a href="https://xiixiixii.xyz"><img src="" id="channel_gif" ></a>
     </div>
     <p></p>
     <div class="row">
@@ -26,9 +25,9 @@
     </div>
     <p></p>
     <div class="button_menu">
-      <input type="image" src="Images/Buttons/stop.png" onclick="audio_stop()" id="stop_button">
-      <input type="image" src="Images/Buttons/play.png" onclick="audio_toggle()" id="play_button">
-      <input type="image" src="Images/Buttons/vol_high.png" onclick="volume_cycle()" id="volume_button">
+      <input type="image" src="Themes/solarized-dark/stop.png" onclick="audio_stop()" id="stop_button">
+      <input type="image" src="Themes/solarized-dark/play.png" onclick="audio_toggle()" id="play_button">
+      <input type="image" src="Themes/solarized-dark/vol_high.png" onclick="volume_cycle()" id="volume_button">
     </div>
     <audio id="audioplayer" autoplay preload="none" src="https://temple.xiixiixii.xyz:8443/ABYSS.ogg" type="audio/ogg"/>
     </audio>
@@ -39,5 +38,6 @@
   </div>
 </body>
 <script src="Javascript/customselect.js"></script>
+  <script src="Javascript/player.js"></script>
 
 </html>
